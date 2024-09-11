@@ -1,65 +1,70 @@
-#include<stdio.h>
-#include<conio.h>
-struct Date{
+#include<iostream>
+using namespace std;
+class Date{
 	int day;
 	int month;
 	int year;
+    public :
+    void initDate()
+    {
+        day=1;
+        month=1;
+        year=1900;
+    }
+    void acceptDateFromConsole()
+    {
+	      cout<<"------------------------------\n";
+          cout<<"Enter Date :"<<endl;
+          cout<<"Day   : ";
+          cin>>day;
+          cout<<"Month : ";
+          cin>>month;
+          cout<<"Year  : ";
+          cin>>year;
+    }
+
+    void printDateOnConsole()
+    {
+        cout<<"------------------------------\n";
+        cout<<"Current Date : "<<day<<"/"<<month<<"/"<<year<<endl;
+    }
+    int menu()
+    {
+        int choice;
+        cout<<"------------------------------";
+        cout<<"\n\tMenu:\n\t1.Set Time\n\t2.Display Time\n\t3.Is a leap ?\n\t4.Exit\nEnter Choice : ";
+        cin>>choice;
+        return choice;
+    }
+    bool isLeapYear()
+    {
+        if(year%4==0)
+          return true;
+        else
+          return false;
+    }
 };
-void initDate(struct Date* ptrDate); 
-void printDateOnConsole(struct Date* ptrDate); 
-void acceptDateFromConsole(struct Date* ptrDate); 
 int main()
 {
-	int choice=1;
-	struct Date d1;
-	initDate(&d1);
-	while(choice!=0)
+	Date d;
+    int choice;
+    d.initDate();
+	while((choice=d.menu())!=4)
 	{
-		printf("\----------------------------------------------");
-		printf("\n\tMenu:\n\t1.Set Date\n\t2.Display Date\n\t3.Exit\nEnter Choice : ");
-	    scanf("%d",&choice);
 	    switch(choice)
 	    {
-	    	case 1 :acceptDateFromConsole(&d1);
+	    	case 1 :d.acceptDateFromConsole();
 	    	        break;
-	        case 2 :printDateOnConsole(&d1);
+	        case 2 :d.printDateOnConsole();
 	                break;
-	        case 3 :printf("----------------- Exit program ----------------------\n");
+            case 3 :cout<<"------------------------------\n";
+                    if(d.isLeapYear())
+                      cout<<"leaf Year"<<endl;
+                    else
+                      cout<<"Not a Leaf Year"<<endl;
 	                break;
-	        default:printf("Enter a valid choice !");
+	        default:cout<<"Enter a valid choice !";
 		}
 	}
 	
-}
-
-void initDate(struct Date* ptrDate)
-{
- 	ptrDate->day=0;
-	ptrDate->month=0;
-	ptrDate->year=0;	
-}
-
-void acceptDateFromConsole(struct Date* ptrDate)
-{
-	printf("-------------------------------------------\n");
-	printf("Enter Current Date :\n");
-	printf("\tDay : ");
-	scanf("%d",&ptrDate->day);
-	printf("\tMonth : ");
-	scanf("%d",&ptrDate->month);
-	printf("\tYear : ");
-	scanf("%d",&ptrDate->year);
-	if(ptrDate->day<=31 && ptrDate->month<=12 && ptrDate->year==2024){
-		printf("Date and Time updated.\n");
-     }
-    else{
-         printf("Please Enter valid date and time.\n");
-         acceptDateFromConsole(ptrDate);
-	    } 
-}
-
-void printDateOnConsole(struct Date* ptrDate)
-{
-  	printf("------------------------------------------\n");
-  	printf("\tCurrent Date : %d/%d/%d\n",ptrDate->day,ptrDate->month,ptrDate->year);
 }
