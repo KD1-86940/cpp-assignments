@@ -331,10 +331,10 @@ int main()
                 cout << "Invalid choice ! " << endl;
                 break;
 	}
+}
 	for(int i=0;i<5;i++)
 	{
 		delete e[i];
 	    e[i]=NULL;
 	}
-  }
 }
